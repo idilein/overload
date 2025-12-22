@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Diktat Input</title>
+    </head>
+    <body>
+        <h1>Bitte Text eingeben</h1>
+        <textarea
+            id="textInput"
+            rows="6"
+            cols="40"
+            placeholder="Hier deinen Text eintippen..."
+        ></textarea>
+        <br/>
+
+        <button id="sendBtn">Senden</button>
+
+        <p>
+            Verbindung:
+            <span id="status">Verbinde...</span>
+        </p>
+
+        <!-- Socket.io Client laden -->
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- Dein eigenes JS für diese Seite -->
+        <script src="input.js"></script>
+    </body>
+</html>
