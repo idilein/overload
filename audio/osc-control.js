@@ -9,8 +9,8 @@ function start_scene(sceneIndex) {
   liveObject.call('fire');
 }
 
-
 function start_clip(trackIndex, clipIndex) {
+  // post('start_clip', trackIndex, clipIndex, '\n');
   liveObject.path = 'live_set tracks ' + trackIndex + ' clip_slots ' + clipIndex;
   liveObject.call('fire');
 }

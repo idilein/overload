@@ -15,6 +15,6 @@ function sendOscMessage(target, args = 0) {
   }
 }
 
-sendOscMessage('start_scene', 2);
-//sendOscMessage('start_clip', 0, 3);
-//sendOscMessage('stop_all');
+// sendOscMessage('start_scene', 2);
+sendOscMessage('start_clip', [1, 0]);
+// sendOscMessage('stop_all');
