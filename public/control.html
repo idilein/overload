@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Audio Control</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #111;
+        color: #f5f5f5;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        display: block;
+        margin-bottom: 0.5rem;
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      #status {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Audio Control</h1>
+
+    <button data-action="scene_low">Szene: Low</button>
+    <button data-action="scene_mid">Szene: Mid</button>
+    <button data-action="scene_high">Szene: High</button>
+    <button data-action="clip_test">Clip Test (1/0)</button>
+    <button data-action="stop_all">Stop All</button>
+
+    <div id="status">Status: nicht verbunden</div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="control.js"></script>
+  </body>
+</html>
