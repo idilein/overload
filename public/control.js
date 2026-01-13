@@ -2,6 +2,7 @@ const socket = io();
 
 const statusEl = document.getElementById("status");
 const buttons = document.querySelectorAll("button[data-action]");
+const btnReset = document.getElementById("btnReset");
 
 socket.on("connect", () => {
   statusEl.textContent = `Status: verbunden (Socket ID: ${socket.id})`;
@@ -18,6 +19,12 @@ buttons.forEach((btn) => {
     socket.emit("audio_control", { action });
     statusEl.textContent = `Sende Aktion: ${action} ...`;
   });
+});
+
+// Reset Button for Textelements
+btnReset.addEventListener("click", () => {
+  socket.emit("reset_projection");
+  statusEl.textContent = "Reset sent";
 });
 
 // Rückmeldung vom Server

@@ -6,7 +6,11 @@ const statusEl = document.getElementById("status");
 const textInput = document.getElementById("textInput");
 const sendBtn = document.getElementById("sendBtn");
 
-// Verbindungsstatus anzeigen
+document.addEventListener("DOMContentLoaded", () => {
+  textInput.focus();
+});
+
+/* Verbindungsstatus anzeigen
 socket.on("connect", () => {
   statusEl.textContent = "verbunden ✅";
 });
@@ -14,6 +18,7 @@ socket.on("connect", () => {
 socket.on("disconnect", () => {
   statusEl.textContent = "getrennt ❌";
 });
+*/
 
 // Wenn auf "Senden" geklickt wird → Text an den Server schicken
 sendBtn.addEventListener("click", () => {
@@ -27,6 +32,7 @@ sendBtn.addEventListener("click", () => {
   // Event "submit_text" an den Server senden
   socket.emit("submit_text", { text });
 
-  // Optional: Textfeld leeren oder sperren
-  // textInput.value = "";
+  // Textfeld leeren
+  textInput.value = "";
+  textInput.focus(); //cursor aktiv
 });

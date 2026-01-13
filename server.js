@@ -79,17 +79,44 @@ const AUDIO_MAP = {
 };
 
 // ----------------------
+// Projection Slot State (max 3 inputs)
+// ----------------------
+const SLOT_ORDER = ["center", "topLeft", "topRight", "bottomCenter"];
+
+// socket.id -> { slot, text }
+const projectionState = {};
+
+// Reihenfolge der Teilnehmer (max 3)
+const inputOrder = [];
+
+// ----------------------
 // WebSocket Handling
 // ----------------------
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 
   socket.on("submit_text", (data) => {
-    const text = data?.text || "";
-    console.log("Text received:", text);
+  const text = data?.text || "";
+  console.log("Text received:", text);
 
-    io.emit("new_text", { text });
+  // Falls neues Gerät und noch Platz: Slot zuweisen
+  if (!projectionState[socket.id] && inputOrder.length < 3) {
+    inputOrder.push(socket.id);
+    projectionState[socket.id] = {
+      slot: SLOT_ORDER[inputOrder.length - 1],
+      text: "",
+    };
+  }
+
+  // Nur wenn dieser Client einen Slot hat, Text speichern
+  if (projectionState[socket.id]) {
+    projectionState[socket.id].text = text;
+  }
+
+  // An Output schicken: kompletter Zustand
+  io.emit("projection_update", projectionState);
   });
+
 
   socket.on("audio_control", async (payload) => {
     const action = payload?.action;
@@ -108,7 +135,17 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
+    //Text bleibt bis Reset sichtbar
   });
+
+  socket.on("reset_projection", () => {
+  // Kann man als Operator über control UI auslösen
+  inputOrder.length = 0;
+  for (const key of Object.keys(projectionState)) delete projectionState[key];
+
+  io.emit("projection_update", projectionState);
+  });
+
 });
 
 // ----------------------
