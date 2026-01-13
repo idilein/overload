@@ -49,6 +49,6 @@ function testStopAll() {
 }
 
 // HIER auswählen, was du testen willst:
-//testStartClip();
+testStartClip();
 // testStartScene();
-testStopAll();
+//testStopAll();
