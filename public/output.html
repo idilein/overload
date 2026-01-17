@@ -3,75 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <title>Projektion – Output</title>
-    <link href="fonts.googleapis.com" rel="stylesheet">
-    <style>
-      body {
-        margin: 0;
-        font-family: 'Space Grotesk', sans-serif;
-        background: #0E0F11;
-        color: #F1F2ED;
-      }
+    <link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+      <style>
+        body {
+          margin: 0;
+          font-family: 'Space Grotesk', sans-serif;
+          background: #0E0F11;
+          color: #F1F2ED;
+        }
 
-      .projection {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        padding: 40px;
-        box-sizing: border-box;
-        text-align: center;
-      }
+        #projection {
+          width: 100vw;
+          height: 100vh;
+          padding-top: 8vh;     /* Abstand von oben */
+          box-sizing: border-box;
+        }
 
-      #projectionText {
-        font-size: 2.5rem;
-        line-height: 1.4;
-      }
+        /* Reihe oben mit 3 Spalten */
+        .row {
+          display: flex;
+          justify-content: center;  /* Gruppe zentrieren */
+          align-items: flex-start;
+          gap: 4vw;                 /* Abstand zwischen den Blöcken */
+          padding: 0 6vw;           /* Abstand zum Rand */
+        }
 
-      #projection {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-      }
+        /* Textblöcke (WICHTIG: kein position:absolute!) */
+        .text-block{
+          width: 28vw;
+          max-width: 28vw;
 
-      .text-block {
-        position: absolute;
-        max-width: 40vw;
-        font-size: 2.2rem;
-        line-height: 1.4;
-        opacity: 0;
-        transition:
-          transform 1.2s ease,
-          opacity 0.8s ease;
-      }
+          font-size: 2.0rem;
+          line-height: 1.35;
 
-      /* SLOT POSITIONS FOR 3 Text Outputs*/
+          white-space: pre-wrap;
+          overflow-wrap: anywhere;
+          hyphens: auto;
 
-      #center {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
+          text-align: left;
 
-      #topLeft {
-        top: 10%;
-        left: 10%;
-      }
+          opacity: 0;
+          transition: opacity 0.8s ease;
+        }
 
-      #topRight {
-        top: 10%;
-        right: 10%;
-      }
-
-      #bottomCenter {
-        bottom: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      /* ACTIVE STATE */
-      .text-block.active {
-        opacity: 1;
-      }
+        .text-block.active {
+          opacity: 1;
+        }
 
 
       /* Verbindungsstatus
@@ -100,17 +77,19 @@
     -->
 
     <div id="projection">
-      <div class="text-block" id="center"></div>
-      <div class="text-block" id="topLeft"></div>
-      <div class="text-block" id="topRight"></div>
-      <div class="text-block" id="bottomCenter"></div>
+      <div class="row">
+        <div class="text-block" id="topLeft"></div>
+        <div class="text-block" id="center"></div>
+        <div class="text-block" id="bottomRight"></div>
+      </div>
     </div>
+
 
     <!-- Socket.io Client -->
     <script src="/socket.io/socket.io.js"></script>
     <!-- JS für die Dyslexia Transformation -->
     <script src="dyslexia.js"></script>
-    <!-- Dein JS für die Output-Seite -->
-    <script src="output.js"></script>
+    <!-- Dein JS für die Output-Seite, type="module" for Jumping letters import -->
+    <script type="module" src="output.js"></script>
   </body>
 </html>

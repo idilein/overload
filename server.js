@@ -81,7 +81,8 @@ const AUDIO_MAP = {
 // ----------------------
 // Projection Slot State (max 3 inputs)
 // ----------------------
-const SLOT_ORDER = ["center", "topLeft", "topRight", "bottomCenter"];
+const SLOT_ORDER = ["topLeft", "center", "bottomRight"];
+
 
 // socket.id -> { slot, text }
 const projectionState = {};
